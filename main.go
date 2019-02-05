@@ -17,7 +17,7 @@ func handlerTemplate(w http.ResponseWriter, r *http.Request) {
 		log.Printf("title: %s\n", title)
 	}
 
-	fmt.Fprintf(w, "Hello from:  "+title+"\n")
+	fmt.Fprintf(w, "Hello Bob, from:  "+title+"\n")
 }
 
 func main() {

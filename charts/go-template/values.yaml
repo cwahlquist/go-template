@@ -9,7 +9,8 @@ image:
 service:
   name: go-template
   type: ClusterIP
-  externalPort: 80
+  istioPort: 80
+  externalPort: 5000
   internalPort: 8080
   annotations:
     fabric8.io/expose: "true"

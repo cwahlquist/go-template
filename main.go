@@ -6,8 +6,8 @@ import (
 	"net/http"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	title := "Jenkins X golang http example"
+func handlerTemplate(w http.ResponseWriter, r *http.Request) {
+	title := "Circadence GoLang Template"
 
 	from := ""
 	if r.URL != nil {
@@ -21,6 +21,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", handler)
+	http.HandleFunc("/", handlerTemplate)
 	http.ListenAndServe(":8080", nil)
 }

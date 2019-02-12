@@ -1,7 +1,7 @@
 package service
 
 import (
-	m "base-service/model"
+	m "go-template/model"
 )
 
 type Service struct {

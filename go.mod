@@ -1,4 +1,4 @@
-module github.com/cwahlquist/go-template
+module go-template
 
 require (
 	github.com/golang/protobuf v1.2.0

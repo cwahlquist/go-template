@@ -7,7 +7,7 @@ import (
 	"net"
 	"net/http"
 
-	pb "api/go"
+	pb "go-template/api/go"
 
 	h "go-template/handler"
 	m "go-template/model"

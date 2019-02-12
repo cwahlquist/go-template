@@ -33,9 +33,6 @@ func main() {
 		panic(err)
 	}
 
-	// create db interface, in this example we are using a map instead of a actual database session
-	session := make(map[string]m.Todo)
-
 	// inject dependencies
 
 	// initialize service layer

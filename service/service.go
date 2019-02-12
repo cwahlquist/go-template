@@ -7,8 +7,8 @@ import (
 type Service struct {
 }
 
-type gotemplateService interface {
-        Health() (m.Health, error)
+type GotemplateService interface {
+        Health() (*m.Health, error)
 }
 
 func NewService() *Service {
@@ -16,6 +16,6 @@ func NewService() *Service {
 	}
 }
 
-func (s *Service) Health(gotemplateService  *m.Health) (*m.Health, error) {
+func (s *Service) Health() (*m.Health, error) {
 	return s.Health()
 }

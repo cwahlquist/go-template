@@ -45,7 +45,7 @@ func (h *Handler) Read(ctx context.Context, req *pb.Id) (*pb.ServiceCommand, err
 
 // Private conversion methods
 func protoToModel(pb *pb.ServiceCommand) *m.ServiceCommand {
-	return &m.Todo{
+	return &m.ServiceCommand{
 		Id:        pb.Id,
 		Name:      pb.Name,
 		Completed: pb.Completed,
@@ -53,7 +53,7 @@ func protoToModel(pb *pb.ServiceCommand) *m.ServiceCommand {
 }
 
 func modelToProto(model *m.ServiceCommand) *pb.ServiceCommand {
-	return &pb.Todo{
+	return &pb.ServiceCommand{
 		Id:        model.Id,
 		Name:      model.Name,
 		Completed: model.Completed,

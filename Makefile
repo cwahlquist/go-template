@@ -21,7 +21,6 @@ all: build
 check: fmt build test
 
 get-deps:
-	export GO11MODULE=on
 	wget https://github.com/grpc/grpc-web/releases/download/1.0.3/protoc-gen-grpc-web-1.0.3-linux-x86_64
 	chmod +x protoc-gen-grpc-web-1.0.3-linux-x86_64
 	mv protoc-gen-grpc-web-1.0.3-linux-x86_64 /usr/bin/protoc-gen-grpc-web
@@ -43,7 +42,7 @@ proto:
         $(PROTO_PATH)/service.proto
 
 build:
-	CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
+	env GO11MODULE=on CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
 
 test: 
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) test $(PACKAGE_DIRS) -test.v

@@ -8,13 +8,13 @@ spec:
   servers:
   - port:
       number: {{ .Values.service.http.istioPort }}
-      name: http
+      name: http-{{ .Values.service.name }}
       protocol: HTTP
     hosts:
     - "*"
   - port:
       number: {{ .Values.service.grpc.istioPort }}
-      name: grpc
+      name: grpc-{{ .Values.service.name }}
       protocol: grpc
     hosts:
     - "*"

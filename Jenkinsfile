@@ -21,6 +21,7 @@ pipeline {
         container('go') {
           dir('/home/jenkins/go/src/github.com/cwahlquist/go-template') {
             checkout scm
+            sh export GO111MODULE=on
             sh "./autogen.sh"
             sh "make linux"
             sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
@@ -50,6 +51,7 @@ pipeline {
             // so we can retrieve the version in later steps
             sh "echo \$(jx-release-version) > VERSION"
             sh "jx step tag --version \$(cat VERSION)"
+            export GO111MODULE=on
             sh "./autogen.sh"
             sh "make build"
             sh "export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml"

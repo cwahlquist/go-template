@@ -11,10 +11,21 @@ PKGS := $(subst  :,_,$(PKGS))
 BUILDFLAGS := ''
 CGO_ENABLED = 0
 VENDOR_DIR=vendor
+PROTO_PATH="api/proto"
+JS_OUT_DIR="api/js"
+GO_OUT_DIR="api/go"
 
 all: build
 
 check: fmt build test
+
+proto:
+	protoc \
+        --proto_path=${PROTO_PATH}:. \
+        --go_out=plugins=grpc:${GO_OUT_DIR} \
+        --grpc-web_out=import_style=commonjs,mode=grpcwebtext:${JS_OUT_DIR} \
+        --js_out="import_style=commonjs,binary:${JS_OUT_DIR}" \
+        $(PROTO_PATH)/service.proto
 
 build:
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)

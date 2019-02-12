@@ -16,6 +16,8 @@ spec:
       number: {{ .Values.service.grpc.istioPort }}
       name: grpc-{{ .Values.service.name }}
       protocol: grpc
+    tls:
+      mode: PASSTHROUGH
     hosts:
     - "*"
 ---

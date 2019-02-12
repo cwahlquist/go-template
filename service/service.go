@@ -8,14 +8,13 @@ type Service struct {
 }
 
 type GotemplateService interface {
-        Health() (*m.Health, error)
+	Health(*m.ServiceCommand) (*m.ServiceCommand, error)
 }
 
 func NewService() *Service {
-	return &Service{
-	}
+	return &Service{}
 }
 
-func (s *Service) Health() (*m.Health, error) {
-	return s.Health()
+func (s *Service) Health(sc *m.ServiceCommand) (*m.ServiceCommand, error) {
+	return sc, nil
 }

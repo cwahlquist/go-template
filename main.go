@@ -10,7 +10,7 @@ import (
 	pb "go-template/api/go"
 
 	h "go-template/handler"
-	m "go-template/model"
+//	m "go-template/model"
 	s "go-template/service"
 
 	"google.golang.org/grpc"
@@ -44,7 +44,7 @@ func main() {
 	grpcServer := grpc.NewServer()
 
 	// register missions PB with grpcServer
-	pb.RegisterGoTemplateServiceServer(grpcServer, hnd)
+	pb.RegisterGotemplateServiceServer(grpcServer, hnd)
 
 	// create http server
 	http.HandleFunc("/health", healthHandler)

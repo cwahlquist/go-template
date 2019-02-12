@@ -1,6 +1,6 @@
 package model
 
-type GotemplateService struct {
+type ServiceCommand struct {
 	Id        string
 	Name      string
 	Completed bool

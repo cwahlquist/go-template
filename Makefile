@@ -21,6 +21,7 @@ all: build
 check: fmt build test
 
 get-deps:
+	export GO11MODULE=on
 	wget https://github.com/grpc/grpc-web/releases/download/1.0.3/protoc-gen-grpc-web-1.0.3-linux-x86_64
 	chmod +x protoc-gen-grpc-web-1.0.3-linux-x86_64
 	mv protoc-gen-grpc-web-1.0.3-linux-x86_64 /usr/bin/protoc-gen-grpc-web

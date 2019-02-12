@@ -21,6 +21,7 @@ all: build
 check: fmt build test
 
 get-deps:
+	export GO111MODULE=on
 	wget https://github.com/grpc/grpc-web/releases/download/1.0.3/protoc-gen-grpc-web-1.0.3-linux-x86_64
 	chmod +x protoc-gen-grpc-web-1.0.3-linux-x86_64
 	mv protoc-gen-grpc-web-1.0.3-linux-x86_64 /usr/bin/protoc-gen-grpc-web
@@ -40,7 +41,6 @@ proto:
         --grpc-web_out=import_style=commonjs,mode=grpcwebtext:${GRPC_WEB_OUT_DIR} \
         --js_out="import_style=commonjs,binary:${JS_OUT_DIR}" \
         $(PROTO_PATH)/service.proto
-	sleep 5000
 
 build:
 	CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)

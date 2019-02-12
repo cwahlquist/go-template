@@ -16,5 +16,7 @@ func NewService() *Service {
 }
 
 func (s *Service) Health(sc *m.ServiceCommand) (*m.ServiceCommand, error) {
+	sc.Completed = true
+
 	return sc, nil
 }

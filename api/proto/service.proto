@@ -15,4 +15,3 @@ message ServiceCommand {
 message Id {
     string id = 1;
 }
-

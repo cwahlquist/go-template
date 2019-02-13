@@ -26,7 +26,8 @@ get-deps:
 	mv protoc-gen-grpc-web-1.0.3-linux-x86_64 /usr/bin/protoc-gen-grpc-web
 	git clone https://github.com/golang/protobuf
 	cd protobuf/protoc-gen-go; git checkout tags/v1.2.0 -b v1.2.0
-	cd protobuf/protoc-gen-go; go install
+	cd protobuf/protoc-gen-go; go build
+	cd protobuf/protoc-gen-go; cp protoc-gen-go /usr/bin/protoc-gen-go
 
 proto:
 	mkdir -p $(GO_OUT_DIR)
@@ -35,7 +36,7 @@ proto:
 	protoc \
         --proto_path=${PROTO_PATH}:. \
         --go_out=plugins=grpc:${GO_OUT_DIR} \
-        --grpc-web_out=import_style=commonjs,mode=grpcwebtext:${JS_OUT_DIR} \
+        --grpc-web_out=import_style=commonjs,mode=grpcwebtext:${GRPC_WEB_OUT_DIR} \
         --js_out="import_style=commonjs,binary:${JS_OUT_DIR}" \
         $(PROTO_PATH)/service.proto
 

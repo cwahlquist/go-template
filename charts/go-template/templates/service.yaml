@@ -24,7 +24,7 @@ spec:
 {{- if .Values.service.grpc.enabled }}
   - port: {{ .Values.service.grpc.port }}
     targetPort: {{ .Values.service.grpc.port }}
-    protocol: TCP
+    protocol: grpc
     name: grpc-web-port
 {{- end }}
   selector:

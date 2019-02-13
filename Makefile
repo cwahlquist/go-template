@@ -24,6 +24,9 @@ get-deps:
 	wget https://github.com/grpc/grpc-web/releases/download/1.0.3/protoc-gen-grpc-web-1.0.3-linux-x86_64
 	chmod +x protoc-gen-grpc-web-1.0.3-linux-x86_64
 	mv protoc-gen-grpc-web-1.0.3-linux-x86_64 /usr/bin/protoc-gen-grpc-web
+	git clone https://github.com/golang/protobuf
+	cd protobuf/protoc-gen-go; git checkout tags/v1.2.0 -b v1.2.0
+	cd protobuf/protoc-gen-go; go install
 
 proto:
 	mkdir -p $(GO_OUT_DIR)
@@ -53,6 +56,7 @@ fmt:
 
 clean:
 	rm -rf build release
+	rm -rf protobuf
 	rm -rf $(JS_OUT_DIR)
 	rm -rf $(GO_OUT_DIR)
 	rm -rf $(GRPC_WEB_OUT_DIR)

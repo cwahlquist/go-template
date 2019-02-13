@@ -14,12 +14,21 @@ VENDOR_DIR=vendor
 PROTO_PATH="api/proto"
 JS_OUT_DIR="api/js"
 GO_OUT_DIR="api/go"
+GRPC_WEB_OUT_DIR="api/web"
 
 all: build
 
 check: fmt build test
 
+get-deps:
+	wget https://github.com/grpc/grpc-web/releases/download/1.0.3/protoc-gen-grpc-web-1.0.3-linux-x86_64
+	chmod +x protoc-gen-grpc-web-1.0.3-linux-x86_64
+	mv protoc-gen-grpc-web-1.0.3-linux-x86_64 /usr/bin/protoc-gen-grpc-web
+
 proto:
+	mkdir -p $(GO_OUT_DIR)
+	mkdir -p $(JS_OUT_DIR)
+	mkdir -p $(GRPC_WEB_OUT_DIR)
 	protoc \
         --proto_path=${PROTO_PATH}:. \
         --go_out=plugins=grpc:${GO_OUT_DIR} \
@@ -44,6 +53,9 @@ fmt:
 
 clean:
 	rm -rf build release
+	rm -rf $(JS_OUT_DIR)
+	rm -rf $(GO_OUT_DIR)
+	rm -rf $(GRPC_WEB_OUT_DIR)
 
 linux:
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=linux GOARCH=amd64 $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)

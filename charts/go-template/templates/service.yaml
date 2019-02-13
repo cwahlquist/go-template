@@ -15,43 +15,17 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-  - port: {{ .Values.service.externalPort }}
-    targetPort: {{ .Values.service.internalPort }}
+{{- if .Values.service.http.enabled }}
+  - port: {{ .Values.service.http.externalPort }}
+    targetPort: {{ .Values.service.http.internalPort }}
     protocol: TCP
     name: http
+{{- end }}
+{{- if .Values.service.grpc.enabled }}
+  - port: {{ .Values.service.grpc.externalPort }}
+    targetPort: {{ .Values.service.grpc.internalPort }}
+    protocol: TCP
+    name: grpc-web-port
+{{- end }}
   selector:
     app: {{ template "fullname" . }}
----
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: {{ .Values.service.name }}-gateway
-spec:
-  selector:
-    istio: ingressgateway
-  servers:
-  - port:
-      number: {{ .Values.service.istioPort }}
-      name: http
-      protocol: HTTP
-    hosts:
-    - "*"
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: {{ .Values.service.name }}-virtualservice
-spec:
-  hosts:
-  - "*"
-  gateways:
-  - {{ .Values.service.name }}-gateway
-  http:
-  - match:
-    - uri:
-        prefix: /{{ .Values.service.name }}
-    route:
-    - destination:
-        host: {{ .Values.service.name }}
-        port:
-          number: {{ .Values.service.externalPort }}

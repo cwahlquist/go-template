@@ -48,8 +48,9 @@ func main() {
 
 	// create http server
 	http.HandleFunc("/health", healthHandler)
+	http.HandleFunc("/readiness", readinessHandler)
 	go func() {
-		if err := http.ListenAndServe(":80", nil); err != nil {
+		if err := http.ListenAndServe(":8080", nil); err != nil {
 			// cannot panic, because this probably is an intentional close
 			log.Printf("Httpserver: ListenAndServe() error: %s", err)
 		}
@@ -64,5 +65,9 @@ func main() {
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Healthy")
+	fmt.Fprintln(w, "Healthy")
+}
+
+func readinessHandler(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintln(w, "Ready")
 }

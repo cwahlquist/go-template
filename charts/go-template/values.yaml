@@ -9,9 +9,49 @@ image:
 service:
   name: go-template
   type: ClusterIP
-  istioPort: 80
-  externalPort: 5000
-  internalPort: 8080
+  http:
+    enabled: true
+    istioPort: 80
+    externalPort: 5000
+    internalPort: 8080
+    prefix: /
+  grpc:
+    enabled: true
+    istioPort: 31400
+    externalPort: 5010
+    internalPort: 8090
+    prefix: /
+    corsPolicy:
+      allowOrigin:
+        - "*"
+      allowMethods:
+        - POST
+        - GET
+        - OPTIONS
+        - PUT
+        - DELETE
+      allowHeaders:
+        - grpc-timeout
+        - content-type
+        - keep-alive
+        - user-agent
+        - cache-control
+        - content-type
+        - content-transfer-encoding
+        - custom-header-1
+        - x-accept-content-transfer-encoding
+        - x-accept-response-streaming
+        - x-user-agent
+        - x-grpc-web
+        - authorization
+      maxAge: 1728s
+      exposeHeaders:
+        - custom-header-1
+        - grpc-status
+        - grpc-message
+      allowCredentials: true
+  gateway:
+    enabled: true
   annotations:
     fabric8.io/expose: "true"
     fabric8.io/ingress.annotations: "kubernetes.io/ingress.class: nginx"
@@ -22,14 +62,17 @@ resources:
   requests:
     cpu: 80m
     memory: 128Mi
-probePath: /
 livenessProbe:
   initialDelaySeconds: 60
   periodSeconds: 10
   successThreshold: 1
   timeoutSeconds: 1
+  path: /health
+  port: 8080
 readinessProbe:
   periodSeconds: 10
   successThreshold: 1
   timeoutSeconds: 1
+  path: /readiness
+  port: 8080
 terminationGracePeriodSeconds: 10

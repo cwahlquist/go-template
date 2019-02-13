@@ -16,14 +16,14 @@ spec:
   type: {{ .Values.service.type }}
   ports:
 {{- if .Values.service.http.enabled }}
-  - port: {{ .Values.service.http.externalPort }}
-    targetPort: {{ .Values.service.http.externalPort }}
-    protocol: TCP
+  - port: {{ .Values.service.http.port }}
+    targetPort: {{ .Values.service.http.port }}
+    protocol: HTTP
     name: http
 {{- end }}
 {{- if .Values.service.grpc.enabled }}
-  - port: {{ .Values.service.grpc.externalPort }}
-    targetPort: {{ .Values.service.grpc.externalPort }}
+  - port: {{ .Values.service.grpc.port }}
+    targetPort: {{ .Values.service.grpc.port }}
     protocol: TCP
     name: grpc-web-port
 {{- end }}

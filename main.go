@@ -49,7 +49,6 @@ func main() {
 	// create http server
 	http.HandleFunc("/health", healthHandler)
 	http.HandleFunc("/readiness", readinessHandler)
-	http.HandleFunc("/", healthHandler)
 	go func() {
 		if err := http.ListenAndServe(":8080", nil); err != nil {
 			// cannot panic, because this probably is an intentional close

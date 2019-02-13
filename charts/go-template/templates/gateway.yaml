@@ -39,7 +39,7 @@ spec:
     - destination:
         host: {{ .Values.service.name }}
         port:
-          number: {{ .Values.service.grpc.externalPort }}
+          number: {{ .Values.service.grpc.port }}
     corsPolicy:
 {{ toYaml .Values.service.grpc.corsPolicy | indent 6 }}
 {{- end }}
@@ -51,5 +51,5 @@ spec:
     - destination:
         host: {{ .Values.service.name }}
         port:
-          number: {{ .Values.service.http.externalPort }}
+          number: {{ .Values.service.http.port }}
 {{- end }}

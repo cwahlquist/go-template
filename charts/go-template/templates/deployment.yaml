@@ -23,11 +23,11 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
 {{- if .Values.service.http.enabled }}
-        - containerPort: {{ .Values.service.http.internalPort }}
+        - containerPort: {{ .Values.service.http.port }}
           name: http
 {{- end }}
 {{- if .Values.service.grpc.enabled }}
-        - containerPort: {{ .Values.service.grpc.internalPort }}
+        - containerPort: {{ .Values.service.grpc.port }}
           name: grpc-web-port
 {{- end }}
         livenessProbe:

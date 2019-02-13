@@ -12,14 +12,12 @@ service:
   http:
     enabled: true
     istioPort: 80
-    externalPort: 5000
-    internalPort: 8080
+    port: 8080
     prefix: /go-template
   grpc:
     enabled: true
     istioPort: 31400
-    externalPort: 5010
-    internalPort: 8090
+    port: 8090
     prefix: /go-template-grpc
     corsPolicy:
       allowOrigin:

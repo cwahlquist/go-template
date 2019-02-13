@@ -1,6 +1,6 @@
 #!/bin/bash
 
-printf "\nWhat is the service name?\n"
+printf "\nWhat is the service name (lowercase)?\n"
 read serviceName
 
 printf "\nWhat is the repo path?\n"

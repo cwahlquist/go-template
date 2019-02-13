@@ -27,7 +27,8 @@ get-deps:
 	git clone https://github.com/golang/protobuf
 	cd protobuf/protoc-gen-go; git checkout tags/v1.2.0 -b v1.2.0
 	cd protobuf/protoc-gen-go; go build
-	cd protobuf/protoc-gen-go; cp protoc-gen-go /usr/bin/protoc-gen-go
+	cp protobuf/protoc-gen-go/protoc-gen-go /usr/bin/protoc-gen-go
+	rm -rf protobuf
 
 proto:
 	mkdir -p $(GO_OUT_DIR)
@@ -57,10 +58,10 @@ fmt:
 
 clean:
 	rm -rf build release
-	rm -rf protobuf
 	rm -rf $(JS_OUT_DIR)
 	rm -rf $(GO_OUT_DIR)
 	rm -rf $(GRPC_WEB_OUT_DIR)
+	rm -rf protobuf
 
 linux:
 	CGO_ENABLED=$(CGO_ENABLED) GOOS=linux GOARCH=amd64 $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)

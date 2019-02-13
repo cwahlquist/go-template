@@ -18,13 +18,13 @@ spec:
 {{- if .Values.service.http.enabled }}
   - port: {{ .Values.service.http.port }}
     targetPort: {{ .Values.service.http.port }}
-    protocol: tcp
+    protocol: TCP
     name: http
 {{- end }}
 {{- if .Values.service.grpc.enabled }}
   - port: {{ .Values.service.grpc.port }}
     targetPort: {{ .Values.service.grpc.port }}
-    protocol: tcp
+    protocol: TCP
     name: grpc-web-port
 {{- end }}
   selector:
